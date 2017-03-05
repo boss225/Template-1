@@ -1,0 +1,26 @@
+<div ng-hide="attrs.id">
+    <md-button ng-disabled="true" ng-transclude>ĐẶT HÀNG</md-button>
+</div>
+<div ng-show="attrs.id">
+    <div class="btq">
+        <b>SỐ LƯỢNG</b>
+        <br/>
+        <input type="number" name="quantity" min="1" id="quantity" ng-model="q" value="1">
+    </div>
+    <div class="row" style="margin-left: 0; margin-right: 0">
+        <md-button
+                   ng-click="ngCart.addItem(id, name, img, price, q, data)"
+                   ng-transclude>THÊM VÀO GIỎ
+        </md-button>
+        <!--        <md-button ng-show="inCart()" ng-disabled="true" class="md-raised md-primary">
+                    ĐÃ CHỌN <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </md-button>-->
+
+        <md-button ng-show="inCart()" class="md-fab md-mini" ng-click="ngCart.removeItemById(id)" style="cursor: pointer ;float: right">
+            <md-tooltip md-direction="left">
+                Bỏ chọn
+            </md-tooltip>
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </md-button>        
+    </div>
+</div>

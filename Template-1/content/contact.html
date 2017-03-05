@@ -1,0 +1,44 @@
+<div ng-controller="contactCtrl">
+    <div class="row det1">
+        <a href="#">Trang chủ</a> > 
+        <a>Liên hệ</a>
+    </div>
+    <iframe src="https://a2fshop.com/sunshopseles/get-map/(height)" height="35%" width="100%" style="border:0"> </iframe>
+    <br>
+    <div class="container">
+        <div class="col-md-8 col-sm-12">
+            <md-content layout-padding>
+                <form name="projectForm">
+                    <md-input-container class="md-block">
+                        <label>Ho và tên </label>
+                        <input required name="clientName" ng-model="project.clientName">
+                        <div ng-messages="projectForm.clientName.$error">
+                            <div ng-message="required">This is required.</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Email </label>
+                        <input required type="email" name="clientEmail" ng-model="project.clientEmail"
+                               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                        <div ng-messages="projectForm.clientEmail.$error" role="alert">
+                            <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                Your email must be between 10 and 100 characters long and look like an e-mail address.
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Nội dung </label>
+                        <textarea ng-model="user.biography" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                    </md-input-container>
+                    <button class="w3-btn w3-light-grey" type="submit">GỬI NHẬN XÉT</button>
+                </form>
+                
+            </md-content>
+
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <p>SUNSHOP Việt Nam sẽ mang lại cho khách hàng những trải nghiệm mua sắm thời trang hàng hiệu trực tuyến thú vị.</p>
+            <p ng-bind-html="abouts.about_short_vi"></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="cart-empty" role="alert" ng-show="ngCart.getTotalItems() === 0">
+    Giỏ hàng của bạn đang trống
+</div><br>
+
+<a href="#/home" class="w3-btn w3-light-grey" ng-show="ngCart.getTotalItems() === 0">
+    MUA HÀNG
+</a>
+
+<div class="table-responsive" ng-show="ngCart.getTotalItems() > 0">
+
+    <table class="table table-bordered ngCart cart">
+
+        <thead>
+            <tr>
+                <th colspan="2">Sản phẩm đặt hàng</th>
+                <th>Số lượng</th>
+                <th>Giá tiền</th>
+                <th>Tổng cộng</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in ngCart.getCart().items track by $index">
+                <td id="center" style="width: 1%"><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-trash"></span></td>
+
+                <td id="resp">
+                    <img src="{{item.getImg()}}" class="img-responsive" style="float:left; width:60px"> 
+                    <div id="center1">
+                        {{ item.getName()}}
+                    </div>
+                </td>
+
+                <td id="center">
+                    <span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity() == 1}"
+                          ng-click="item.setQuantity( - 1, true)"></span>
+                    &nbsp;&nbsp;{{ item.getQuantity() | number}}&nbsp;&nbsp;
+                    <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span>
+                </td>
+                <td id="center">{{ item.getPrice() | currency:'':0}}đ</td>
+                <td id="center">{{ item.getTotal() | currency:'':0}}đ</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+
+<div class="row total" ng-show="ngCart.getTotalItems() !== 0">
+    <div class="col-md-8">
+        <a href="#/home" class="w3-btn w3-light-grey">
+            MUA HÀNG TIẾP
+        </a>
+    </div>
+    <div class="col-md-4">
+        <table class="table">
+            <tr>
+                <td>Tổng tiền :</td>
+                <td>{{ ngCart.totalCost() | currency:'':0}}đ</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row total" ng-show="ngCart.getTotalItems() !== 0">
+    <div style="float: right">
+        <a class="w3-btn w3-light-grey w3-hover-teal">
+            THANH TOÁN
+        </a>
+    </div>
+</div>
+
+

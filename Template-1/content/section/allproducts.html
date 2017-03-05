@@ -1,0 +1,125 @@
+<div ng-controller="allprodsCtrl" class="container">
+    <div class="row det1">
+        <a href="#">Trang chủ</a>  
+        <a ng-if="param3 === 'all'"> > Tất cả sản phẩm</a>
+        <a ng-if="param3 === 'giam-gia'"> > Hàng giảm giá</a>
+        <a ng-if="param3 === 'ban-chay-nhat'"> > Hàng bán chạy nhất</a>
+        <a ng-if="param7 !== ''"> > Tìm kiếm : {{param7}}</a>
+        <a ng-if="param6 == 2 || param6 == 1" ng-repeat="dm in alldm |filter: param5"> > {{dm.keyword_vi}}</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <ul class="w3-ul collect-cate">
+                <li>
+                    <h4><span class="fa fa-bars"> </span> DANH MỤC SẢN PHẨM</h4>
+                </li>
+                <li><a href="#/danh-muc/giam-gia" id="lv1">HÀNG GIẢM GIÁ</a></li>
+                <li><a href="#/danh-muc/ban-chay-nhat" id="lv1">BÁN CHẠY NHẤT</a></li>
+                <li style="border-bottom: none" ng-repeat="alldm in alldm| filter:'F'">
+                    <b id="lv1" ng-if="alldm.level === 1 && alldm.id !== 465">
+                        {{alldm.name_vi}}<span class="glyphicon glyphicon-triangle-bottom" style="float: right"></span>
+                    </b>             
+
+                    <a href="#/danh-muc/{{alldm.seo_vi}}-{{alldm.id}}.{{alldm.level}}" id="lv2" ng-if="alldm.level !== 1 && alldm.id !== 476">{{alldm.name_vi}}</a>                  
+                </li>
+                <li style="border-top: 1px solid gainsboro; border-bottom: 1px solid gainsboro">           
+                    <a href="#/danh-muc/{{alldm[10].seo_vi}}-{{alldm[10].id}}.{{alldm[10].level}}" id="lv1">{{alldm[10].name_vi}}</a>                                 
+                </li>
+            </ul>
+            <br><br/>
+            <div>
+                <h4>TAGS SẢN PHẨM</h4>
+                <hr>
+                <ul class="key-tags">
+                    <li><a href="#/danh-muc/thoi-trang-nu/ao-nu-466.2">Áo nữ</a></li>
+                    <li><a href="#/chi-tiet/phu-kien-1-715">Dây chuyền</a></li>
+                    <li><a href="#/chi-tiet/phu-kien-2-716">Lắc</a></li>
+                    <li><a href="#/danh-muc/thoi-trang-nam/giay-nam-472.2">Quần nam</a></li>
+                    <li><a href="#/chi-tiet/ao-nam-6-723">Áo nam 6</a></li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+            <div>
+                <img class="img-responsive" src="{{imageslide+imgslide[6].image}}">
+            </div>
+            <div class="prodseles">
+                <h2>Tất cả sản phẩm</h2>
+                <hr>
+                <div ng-if="param3 == 'all'" class="col-md-4 col-sm-4 col-xs-6" ng-repeat="item in allprods">
+                    <a href="#/chi-tiet/{{item.name_seo_vi}}-{{item.id}}">
+                        <img class="img-responsive" src="{{imageslide+item.image}}">
+                        <h4>
+                            {{item.name_vi}}
+                        </h4>
+                    </a>
+                    <h5>
+                        <span ng-if="item.price_off_percent !== 0">{{(item.price_off_percent / 100 + 1)*item.price_vn|currency:'':0}}đ</span>
+                        {{item.price_vn|currency:'':0}}đ
+                    </h5>
+                    <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" price="{{item.price_vn}}" quantity="1" img="{{imageslide + item.image}}">THÊM VÀO GIỎ</ngcart-addtocart>
+                    <br><br/>
+                </div>
+                <div ng-if="param3 == 'giam-gia'" class="col-md-4 col-sm-4 col-xs-6" ng-repeat="item in seleoff">
+                    <a href="#/chi-tiet/{{item.name_seo_vi}}-{{item.id}}">
+                        <img class="img-responsive" src="{{imageslide+item.image}}">
+                        <h4>
+                            {{item.name_vi}}
+                        </h4>
+                    </a>
+                    <h5>
+                        <span ng-if="item.price_off_percent !== 0">{{(item.price_off_percent / 100 + 1)*item.price_vn|currency:'':0}}đ</span>
+                        {{item.price_vn|currency:'':0}}đ
+                    </h5>
+                    <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" price="{{item.price_vn}}" quantity="1" img="{{imageslide + item.image}}">THÊM VÀO GIỎ</ngcart-addtocart>
+                    <br><br/>
+                </div>
+                <div ng-if="param3 == 'ban-chay-nhat'" class="col-md-4 col-sm-4 col-xs-6" ng-repeat="item in prodseles">
+                    <a href="#/chi-tiet/{{item.name_seo_vi}}-{{item.id}}">
+                        <img class="img-responsive" src="{{imageslide+item.image}}">
+                        <h4>
+                            {{item.name_vi}}
+                        </h4>
+                    </a>
+                    <h5>
+                        <span ng-if="item.price_off_percent !== 0">{{(item.price_off_percent / 100 + 1)*item.price_vn|currency:'':0}}đ</span>
+                        {{item.price_vn|currency:'':0}}đ
+                    </h5>
+                    <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" price="{{item.price_vn}}" quantity="1" img="{{imageslide + item.image}}">THÊM VÀO GIỎ</ngcart-addtocart>
+                    <br><br/>
+                </div>
+                <div ng-if="param5 !== ''" class="col-md-4 col-sm-4 col-xs-6" ng-repeat="item in deltailcatolog">
+                    <a href="#/chi-tiet/{{item.name_seo_vi}}-{{item.id}}">
+                        <img class="img-responsive" src="{{imageslide+item.image}}">
+                        <h4>
+                            {{item.name_vi}}
+                        </h4>
+                    </a>
+                    <h5>
+                        <span ng-if="item.price_off_percent !== 0">{{(item.price_off_percent / 100 + 1)*item.price_vn|currency:'':0}}đ</span>
+                        {{item.price_vn|currency:'':0}}đ
+                    </h5>
+                    <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" price="{{item.price_vn}}" quantity="1" img="{{imageslide + item.image}}">THÊM VÀO GIỎ</ngcart-addtocart>
+                    <br><br/>
+                </div>
+                <div ng-if="param7 !== ''" class="col-md-4 col-sm-4 col-xs-6" ng-repeat="item in searchprods">
+                    <a href="#/chi-tiet/{{item.name_seo_vi}}-{{item.id}}">
+                        <img class="img-responsive" src="{{imageslide+item.image}}">
+                        <h4>
+                            {{item.name_vi}}
+                        </h4>
+                    </a>
+                    <h5>
+                        <span ng-if="item.price_off_percent !== 0">{{(item.price_off_percent / 100 + 1)*item.price_vn|currency:'':0}}đ</span>
+                        {{item.price_vn|currency:'':0}}đ
+                    </h5>
+                    <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" price="{{item.price_vn}}" quantity="1" img="{{imageslide + item.image}}">THÊM VÀO GIỎ</ngcart-addtocart>
+                    <br><br/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
